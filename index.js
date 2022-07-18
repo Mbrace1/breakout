@@ -19,6 +19,14 @@ const drawBall = () => {
     // fill color
     cntx.fillStyle = "red"
     cntx.fill()
+
+    // 10 co-ods away from any wall add a shadow color
+    if (ballx - radius < 10 || ballx + radius > canvas.width - 10 || bally - radius < 10 || bally + radius > canvas.height - 10) {
+        cntx.shadowColor = 'red';
+        cntx.shadowBlur = 15;
+    } else {
+        cntx.shadowColor = '#fff';
+    }
     // end draw
     cntx.closePath();
 
