@@ -5,7 +5,7 @@ canvas.width = 1200
 canvas.height = 600
 
 // ball
-let radius = 9
+let radius = 14
 let x = 150;
 let y = 250;
 let dx = .05;
@@ -23,14 +23,16 @@ const drawBall = () => {
     cntx.closePath();
 
     // add movement
-    // x += dx;
-    // y += dy;
+    x += dx;
+    y += dy;
 }
 
 const draw = () => {
+    // remove previous drawings
+    cntx.clearRect(0, 0, canvas.width, canvas.height);
+    // draw ball
     drawBall()
 }
 
 
 setInterval(draw, 10);
-console.log(allBlocks)
