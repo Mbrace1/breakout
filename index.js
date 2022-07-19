@@ -19,6 +19,17 @@ const drawBall = () => {
     // fill color
     cntx.fillStyle = "red"
     cntx.fill()
+
+    // 10 co-ods away from any wall add a shadow color
+    // if (ballx - radius < 10 || ballx + radius > canvas.width - 10 || bally - radius < 10 || bally + radius > canvas.height - 10) {
+    //     cntx.filter = 'blur(2px)';
+    // } else {
+    //     cntx.filter = 'blur(0px)';
+    // }
+
+    cntx.beginPath()
+    cntx.fillStyle = "red"
+    cntx.fill()
     // end draw
     cntx.closePath();
 
@@ -29,7 +40,9 @@ const drawBall = () => {
 
 const draw = () => {
     // remove previous drawings
-    cntx.clearRect(0, 0, canvas.width, canvas.height);
+    // cntx.clearRect(0, 0, canvas.width, canvas.height);
+    cntx.fillStyle = 'rgba(255, 255, 255, .2)';
+    cntx.fillRect(0, 0, canvas.width, canvas.height);
     // draw ball
     drawBall()
     // add collisions
@@ -49,7 +62,5 @@ const collisions = () => {
     }
     // add a further check if at bottom wall end game?
 }
-
-
 
 setInterval(draw, 10);
