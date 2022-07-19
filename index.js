@@ -40,11 +40,11 @@ const draw = () => {
 // collisions
 const collisions = () => {
     // ball hitting left or right wall change direction
-    if (ballx + dx - radius < 0 || ballx + dx + radius > canvas.width){
+    if (ballx - radius < 0 || ballx + radius > canvas.width){
         dx = -dx
     }
     // ball hitting top or bottom wall change direction
-    if (bally + dx - radius < 0 || bally + dx + radius > canvas.height){ 
+    if (bally - radius < 0 || bally + radius > canvas.height){ 
         dy = -dy
     }
     // add a further check if at bottom wall end game?
