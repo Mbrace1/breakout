@@ -47,6 +47,8 @@ const draw = () => {
     drawBall()
     // draw panel
     drawPaddle()
+    movePaddle()
+    // movePaddle(event)
     // add collisions
     collisions()
 }
@@ -65,18 +67,33 @@ const collisions = () => {
     // add a further check if at bottom wall end game?
 }
 
-// controllers
-let paddleWidth = 200
-let paddleHeight = 30
+// paddle's initial position
+let paddleWidth = 150
+let paddleHeight = 25
 let paddleX = canvas.width / 2 - paddleWidth / 2
 let paddleY = canvas.height - paddleHeight
 
+// draw paddle
 const drawPaddle = () => {
     cntx.beginPath()
     cntx.rect(paddleX, paddleY, paddleWidth, paddleHeight)
     cntx.fillStyle = "blue"
     cntx.fill()
     cntx.closePath();
+}
+
+// move paddle
+const movePaddle = () => {
+   document.addEventListener('keydown', e => {
+    console.log(paddleX)
+    if (e.key === 'ArrowLeft') {
+        paddleX -= 5
+        if (paddleX < 0) {
+            paddleX = 0
+        }
+        drawPaddle()
+    }
+   })
 }
 
 setInterval(draw, 10);
