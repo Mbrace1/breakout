@@ -45,6 +45,8 @@ const draw = () => {
     cntx.fillRect(0, 0, canvas.width, canvas.height);
     // draw ball
     drawBall()
+    // draw panel
+    drawPaddle()
     // add collisions
     collisions()
 }
@@ -61,6 +63,20 @@ const collisions = () => {
         dy = -dy
     }
     // add a further check if at bottom wall end game?
+}
+
+// controllers
+let paddleWidth = 200
+let paddleHeight = 30
+let paddleX = canvas.width / 2 - paddleWidth / 2
+let paddleY = canvas.height - paddleHeight
+
+const drawPaddle = () => {
+    cntx.beginPath()
+    cntx.rect(paddleX, paddleY, paddleWidth, paddleHeight)
+    cntx.fillStyle = "blue"
+    cntx.fill()
+    cntx.closePath();
 }
 
 setInterval(draw, 10);
