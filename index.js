@@ -14,19 +14,30 @@ let blocks = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0,
 
 function startGame() {
     score = 0
+    initialBlocks()
     controls()
     setInterval(game, 16.7)
 }
 
 //function that draws a block, and adds all appropriate keys
+function initialBlocks(){
+    for(let i = 0; i < blocks.length; i++){
+        for (let j = 0; j < blocks[i].length; j++){
+            arr.push({
+                x position: j * 20
+                y position: y * 10
+                status: 1
+            })
+        }
+    }
+}
+
 function drawBlocks(){
     for (let i = 0; i < blocks.length; i++){
         for (let j = 0; j < blocks[i].length; j++){
-            block x position = j * 20
-            block y positon = i * 20
-            blockWidth = 20
-            blockHeight = 10
-            {x, y, status}
+            if (blocks[i][j].status == 1){
+                cntx.rect(j*20, i*20, blockWidth, blockHeight)
+            }
         }
     }
 }
