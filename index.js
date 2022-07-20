@@ -124,6 +124,8 @@ const collisions = () => {
         // <= 400
         else if (bally + radius >= canvas.height) { {
             gameOver()
+            restartGame()
+
         }
     }
 
@@ -137,6 +139,7 @@ const collisions = () => {
             if (bally >= blocks[i].y && bally <= blocks[i].y + blockHeight){
                 if (ballx >= blocks[i].x && ballx <= blocks[i].x + blockWidth){
                     score++
+                    htmlScore.innerHTML = score
                     blocks[i].status = 0
                     dy = -dy
                     // console.log(blocks)
@@ -213,6 +216,17 @@ const gameOver = () => {
     clearInterval(interval)
 }
 
-
 initialBlocks()
 let interval = setInterval(game, 10);
+
+
+// restart game
+
+const restartGame = () => {
+    // drawBlocks()
+    initialBlocks()
+    interval = setInterval(game, 10);
+    ballx = 150;
+    bally = 250;
+}
+
