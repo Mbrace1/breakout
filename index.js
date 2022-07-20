@@ -8,8 +8,8 @@ canvas.height = 400
 let radius = 14
 let ballx = 150;
 let bally = 250;
-let dx = 1;
-let dy = 1;
+let dx = 2;
+let dy = 2;
 
 const drawBall = () => {
     // begin draw
@@ -61,8 +61,8 @@ function initialBlocks() {
     for(let i = 0; i < row; i++){
         for (let j = 0; j < column; j++){
             blocks.push({
-                blockX: j * blockWidth,
-                blockY: i * blockHeight,
+                x: j * blockWidth,
+                y: i * blockHeight,
                 status: 1,
             })
         }
@@ -75,25 +75,20 @@ function initialBlocks() {
 function drawBlocks(){
 
     for (let i = 0; i < blocks.length; i++){
-        console.log(blocks[i])
-        console.log(blocks[i].blockX)
+        // console.log(blocks[i])
+        // console.log(blocks[i].x)
         if (blocks[i].status == 1){
             cntx.beginPath()
-
-            // cntx.rect(x,y,width,height)
-            // cntx.rect(0,0,20,10)
-            // cntx.strokeStyle = 'blue';
-            cntx.rect(blocks[i].blockX + 10, blocks[i].blockY, blockWidth, blockHeight)
+            cntx.rect(blocks[i].x + 10, blocks[i].y + 5, blockWidth, blockHeight)
             // fill color
             cntx.fillStyle = "red"
             cntx.strokeStyle = "#fff"
             cntx.lineWidth = 2
-            if (i % 2 === 0) {
-                cntx.fillStyle = "blue"
-            }
+            // if (i % 2 === 0) {
+            //     cntx.fillStyle = "blue"
+            // }
             cntx.fill()
             cntx.stroke()
-            // cntx.blocks.addAtribute("")
 
             // end draw
             cntx.closePath();
@@ -104,6 +99,7 @@ function drawBlocks(){
 
 // collisions
 const collisions = () => {
+    // wall collisions
     // ball hitting left or right wall change direction
     if (ballx - radius < 0 || ballx + radius > canvas.width){
         dx = -dx
@@ -113,6 +109,21 @@ const collisions = () => {
         dy = -dy
     }
     // add a further check if at bottom wall end game?
+
+    // block collisions
+    for (let i = 0; i < blocks.length; i++){
+        if (blocks[i].status === 1) {
+            //check position of ball compared to each block. if ball is touching block then block status goes from 1 to 0 and -directiony
+            if (bally >= blocks[i].y && bally <= blocks[i].y + blockHeight){
+                if (ballx >= blocks[i].x && ballx <= blocks[i].x + blockWidth){
+                    // score++
+                    blocks[i].status = 0
+                    dy = -dy
+                    console.log(blocks)
+                }
+            }
+        }
+    }
 }
 
 
