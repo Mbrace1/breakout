@@ -68,6 +68,9 @@ const collisions = () => {
 }
 
 // paddle's initial position
+let right = false
+let left = false
+
 let paddleWidth = 150
 let paddleHeight = 25
 let paddleX = canvas.width / 2 - paddleWidth / 2
@@ -75,6 +78,20 @@ let paddleY = canvas.height - paddleHeight
 
 // draw paddle
 const drawPaddle = () => {
+    if (left) {
+        paddleX -= 5
+        if (paddleX < 0) {
+            paddleX = 0
+        }
+    }
+
+    if (right) {
+        paddleX += 5
+        if (paddleX >= canvas.width - paddleWidth) {
+            paddleX = canvas.width - paddleWidth
+        }
+    }
+
     cntx.beginPath()
     cntx.rect(paddleX, paddleY, paddleWidth, paddleHeight)
     cntx.fillStyle = "blue"
@@ -84,16 +101,28 @@ const drawPaddle = () => {
 
 // move paddle
 const movePaddle = () => {
-   document.addEventListener('keydown', e => {
-    console.log(paddleX)
-    if (e.key === 'ArrowLeft') {
-        paddleX -= 5
-        if (paddleX < 0) {
-            paddleX = 0
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') {
+            left = true
         }
-        drawPaddle()
-    }
-   })
+        document.addEventListener("keyup", e => {
+            if(e.key == "ArrowLeft") {
+            left = false;
+            }
+        })
+    })
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') {
+            right = true
+        }
+        document.addEventListener("keyup", e => {
+            if(e.key == "ArrowRight") {
+            right = false;
+            }
+        })
+    })
+
 }
 
 setInterval(draw, 10);
