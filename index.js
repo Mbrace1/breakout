@@ -4,12 +4,16 @@ const cntx = canvas.getContext('2d')
 canvas.width = 580
 canvas.height = 400
 
+let score = 0;
+
 // ball
 let radius = 14
 let ballx = 150;
 let bally = 250;
 let dx = 1;
 let dy = 1;
+
+let htmlScore = document.getElementById("score")
 
 const drawBall = () => {
     // begin draw
@@ -108,17 +112,21 @@ const collisions = () => {
         dx = -dx
     }
     // ball hitting top or bottom wall change direction
-    if (bally - radius < 0 || bally + radius > canvas.height){ 
+    if (bally - radius < 0){ 
         dy = -dy
     }
     // add a further check if at bottom wall end game?
-    if (bally + radius <= canvas.height + paddleHeight){
+    if (bally + radius >= canvas.height - paddleHeight){
         if (ballx >= paddleX && ballx <= paddleX + paddleWidth){
-            -dy
+            dy = -dy
             console.log("paddle hit")
-        } else {
+        } 
+        // <= 400
+        else if (bally + radius >= canvas.height) { {
             gameOver()
         }
+    }
+
     }
 
 
@@ -128,7 +136,7 @@ const collisions = () => {
             //check position of ball compared to each block. if ball is touching block then block status goes from 1 to 0 and -directiony
             if (bally >= blocks[i].y && bally <= blocks[i].y + blockHeight){
                 if (ballx >= blocks[i].x && ballx <= blocks[i].x + blockWidth){
-                    // score++
+                    score++
                     blocks[i].status = 0
                     dy = -dy
                     // console.log(blocks)
@@ -196,24 +204,15 @@ const movePaddle = () => {
 
 }
 
-const interval = () => {
-    setInterval(game, 10);
-}
 
-
-const startGame = () => {
-    initialBlocks()
-
-    interval()
-}
 
 // game over
 const gameOver = () => {
     console.log("Game Over")
+    console.log(interval)
     clearInterval(interval)
 }
 
 
-
-
-startGame()
+initialBlocks()
+let interval = setInterval(game, 10);
