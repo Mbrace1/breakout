@@ -9,6 +9,7 @@ background.src = './images/canvas-background.jpg'
 
 
 let score = 0;
+let highScore = 0
 let interval
 let fillStyle
 
@@ -20,6 +21,7 @@ let dx
 let dy
 
 let htmlScore = document.getElementById("score")
+let htmlHighScore = document.getElementById("highScore")
 
 const drawBall = () => {
     // begin draw
@@ -137,6 +139,9 @@ const collisions = () => {
         else if (bally + radius >= canvas.height) { {
             //Game Over
             clearInterval(interval)
+            if (score > highScore){
+                htmlHighScore.innerHTML = score
+            }
         }
     }
 
