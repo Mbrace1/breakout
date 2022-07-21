@@ -3,9 +3,37 @@ h1 {
 }
 
 body {
-    /*  */
+    background-image: url("./images/canvas-background.jpg");
+    background-size: cover;
 }
 
 canvas {
     border: 2px solid black;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.container {
+    /* background-color: aquamarine; */
+    text-align: center;
+}
+
+.button {
+    background-color: green; 
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px 25px;
+    margin: 5px 3px 20px;
+}
+
+.score {
+    color: white;
+    font-size: 36px;
 }
