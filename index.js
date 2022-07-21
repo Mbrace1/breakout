@@ -4,6 +4,10 @@ const cntx = canvas.getContext('2d')
 canvas.width = 580
 canvas.height = 400
 
+const background = new Image()
+background.src = './images/canvas-background.jpg'
+
+
 let score = 0;
 let interval
 let fillStyle
@@ -225,6 +229,9 @@ const movePaddle = () => {
 // start/restart game
 
 const startGame = () => {
+    background.onload = function(){
+        cntx.drawImage(background,0,0)
+    }
     score = 0
     htmlScore.innerHTML = 0
     initialBlocks()
