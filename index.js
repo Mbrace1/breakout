@@ -5,6 +5,7 @@ canvas.width = 580
 canvas.height = 400
 
 let score = 0;
+let interval
 
 // ball
 let radius = 14
@@ -65,6 +66,7 @@ let row = 3;
 
 //function that draws a block, and adds all appropriate keys
 function initialBlocks() {
+    blocks.length = 0
     for(let i = 0; i < row; i++){
         for (let j = 0; j < column; j++){
             blocks.push({
@@ -123,9 +125,8 @@ const collisions = () => {
         } 
         // <= 400
         else if (bally + radius >= canvas.height) { {
-            gameOver()
-            restartGame()
-
+            //Game Over
+            clearInterval(interval)
         }
     }
 
@@ -210,23 +211,20 @@ const movePaddle = () => {
 
 
 // game over
-const gameOver = () => {
-    console.log("Game Over")
-    console.log(interval)
-    clearInterval(interval)
-}
-
-initialBlocks()
-let interval = setInterval(game, 10);
 
 
-// restart game
+// start/restart game
 
-const restartGame = () => {
-    // drawBlocks()
+const startGame = () => {
+    score = 0
     initialBlocks()
     interval = setInterval(game, 10);
     ballx = 150;
     bally = 250;
+    dx = 1
+    dy = 1
+    paddleX = canvas.width / 2 - paddleWidth / 2
+    paddleY = canvas.height - paddleHeight
 }
+
 
