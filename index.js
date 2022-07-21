@@ -9,10 +9,10 @@ let interval
 
 // ball
 let radius = 14
-let ballx = 150;
-let bally = 250;
-let dx = 1;
-let dy = 1;
+let ballx
+let bally
+let dx
+let dy
 
 let htmlScore = document.getElementById("score")
 
@@ -217,6 +217,7 @@ const movePaddle = () => {
 
 const startGame = () => {
     score = 0
+    htmlScore.innerHTML = 0
     initialBlocks()
     interval = setInterval(game, 10);
     ballx = 150;
