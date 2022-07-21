@@ -5,7 +5,11 @@ canvas.width = 580
 canvas.height = 400
 
 const background = new Image()
-background.src = './images/canvas-background.jpg'
+background.src = './images/img2.jpg'
+
+background.onload = function(){
+        cntx.drawImage(background,0,0)
+    }
 
 
 let score = 0;
@@ -234,9 +238,9 @@ const movePaddle = () => {
 // start/restart game
 
 const startGame = () => {
-    background.onload = function(){
-        cntx.drawImage(background,0,0)
-    }
+    // background.onload = function(){
+    //     cntx.drawImage(background,0,0)
+    // }
     score = 0
     htmlScore.innerHTML = 0
     initialBlocks()
