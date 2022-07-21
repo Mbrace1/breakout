@@ -6,6 +6,7 @@ canvas.height = 400
 
 let score = 0;
 let interval
+let fillStyle
 
 // ball
 let radius = 14
@@ -72,7 +73,9 @@ function initialBlocks() {
             blocks.push({
                 x: j * blockWidth,
                 y: i * blockHeight,
-                status: 1,
+                status: 2,
+                fillStyle: "red",
+                strokeStyle: "#fff",
             })
         }
     }
@@ -86,12 +89,15 @@ function drawBlocks(){
     for (let i = 0; i < blocks.length; i++){
         // console.log(blocks[i])
         // console.log(blocks[i].x)
-        if (blocks[i].status == 1){
+        if (blocks[i].status > 0){
             cntx.beginPath()
             cntx.rect(blocks[i].x + 10, blocks[i].y + 5, blockWidth, blockHeight)
             // fill color
-            cntx.fillStyle = "red"
+            cntx.fillStyle = "DarkSlateBlue"
             cntx.strokeStyle = "#fff"
+            if (blocks[i].status == 1){
+                cntx.fillStyle = "DarkOrchid"
+            }
             cntx.lineWidth = 2
             // if (i % 2 === 0) {
             //     cntx.fillStyle = "blue"
@@ -135,14 +141,17 @@ const collisions = () => {
 
     // block collisions
     for (let i = 0; i < blocks.length; i++){
-        if (blocks[i].status === 1) {
+        if (blocks[i].status > 0) {
             //check position of ball compared to each block. if ball is touching block then block status goes from 1 to 0 and -directiony
             if (bally >= blocks[i].y && bally <= blocks[i].y + blockHeight){
                 if (ballx >= blocks[i].x && ballx <= blocks[i].x + blockWidth){
                     score++
                     htmlScore.innerHTML = score
-                    blocks[i].status = 0
+                    blocks[i].status--
                     dy = -dy
+                    if (blocks[i].status == 0){
+                        blocks.splice(i, 1)
+                    }
                     // console.log(blocks)
                 }
             }
