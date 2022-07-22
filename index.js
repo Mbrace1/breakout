@@ -112,14 +112,24 @@ function drawBlocks(){
             // if (i % 2 === 0) {
             //     cntx.fillStyle = "blue"
             // }
+            cntx.shadowColor = 'blue';
+            cntx.shadowBlur = 15;
             cntx.fill()
             cntx.stroke()
 
             // end draw
             cntx.closePath();
+            resetCntxStyles()
         }
         
     }
+}
+
+//  resets styles like shadow color so other elements don't use same styles
+// e.g. ball shadow color should not be blue like block shadows
+const resetCntxStyles = () => {
+    cntx.shadowColor = '#fff';
+    cntx.shadowBlur = 0;
 }
 
 // collisions
@@ -146,12 +156,21 @@ const collisions = () => {
             if (score > highScore){
                 htmlHighScore.innerHTML = score
             }
+            cntx.font = '48px serif';
+            cntx.textAlign = 'center';
+            cntx.fillText('GAME OVER!', canvas.width/2, canvas.height -100);
         }
     }
 
     }
 
-
+    if (blocks.length === 0) {
+        // win game
+        clearInterval(interval)
+        cntx.font = '48px serif';
+        cntx.textAlign = 'center';
+        cntx.fillText('YOU WIN!', canvas.width/3, canvas.height -100);
+    }
     // block collisions
     for (let i = 0; i < blocks.length; i++){
         if (blocks[i].status > 0) {
@@ -165,7 +184,7 @@ const collisions = () => {
                     if (blocks[i].status == 0){
                         blocks.splice(i, 1)
                     }
-                    // console.log(blocks)
+                    console.log(blocks)
                 }
             }
         }
